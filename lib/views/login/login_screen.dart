@@ -59,43 +59,43 @@ class _Middle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ElevatedButton.icon(
-          icon: SvgPicture.asset(
-            'assets/icons/login/google_icon.svg',
-            width: 24,
-            height: 24,
-          ),
-          label: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Text('Google', style: FontSystem.KR18M.copyWith(color: const Color(0xFF61677D))),
-          ),
-          onPressed: () {
-            // Google 로그인 로직
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFF5F9FE),
-            minimumSize: const Size(double.infinity, 60),
-            shape: RoundedRectangleBorder(
-              // 버튼의 곡률 조정
-              borderRadius: BorderRadius.circular(14), // 곡률 값 변경
-            ),
-            alignment: Alignment.centerLeft,
-            elevation: 0,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-          child: Row(
-            children: <Widget>[
-              const Expanded(child: Divider()),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 11),
-                child: Text('Or', style: FontSystem.KR14R.copyWith(color: const Color(0xFF262626))),
-              ),
-              const Expanded(child: Divider()),
-            ],
-          ),
-        ),
+        // ElevatedButton.icon(
+        //   icon: SvgPicture.asset(
+        //     'assets/icons/login/google_icon.svg',
+        //     width: 24,
+        //     height: 24,
+        //   ),
+        //   label: Padding(
+        //     padding: const EdgeInsets.only(left: 16),
+        //     child: Text('Google', style: FontSystem.KR18M.copyWith(color: const Color(0xFF61677D))),
+        //   ),
+        //   onPressed: () {
+        //     // Google 로그인 로직
+        //   },
+        //   style: ElevatedButton.styleFrom(
+        //     backgroundColor: const Color(0xFFF5F9FE),
+        //     minimumSize: const Size(double.infinity, 60),
+        //     shape: RoundedRectangleBorder(
+        //       // 버튼의 곡률 조정
+        //       borderRadius: BorderRadius.circular(14), // 곡률 값 변경
+        //     ),
+        //     alignment: Alignment.centerLeft,
+        //     elevation: 0,
+        //   ),
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+        //   child: Row(
+        //     children: <Widget>[
+        //       const Expanded(child: Divider()),
+        //       Padding(
+        //         padding: const EdgeInsets.symmetric(horizontal: 11),
+        //         child: Text('Or', style: FontSystem.KR14R.copyWith(color: const Color(0xFF262626))),
+        //       ),
+        //       const Expanded(child: Divider()),
+        //     ],
+        //   ),
+        // ),
         Obx(() => TextField(
               focusNode: viewModel.emailFocusNode,
               style: FontSystem.KR16R.copyWith(color: const Color(0xFF262626)),
@@ -154,13 +154,13 @@ class _Middle extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: const EdgeInsets.only(right: 24), // 오른쪽 패딩 24
+            padding: const EdgeInsets.only(right: 1), // 오른쪽 패딩 24
             child: TextButton(
               onPressed: () {
                 // Forgot Password Screen
               },
               child: Text(
-                'Forget Password?',
+                '비밀번호를 잊으셨나요?',
                 style: FontSystem.KR12R.copyWith(color: const Color(0xFF7C8BA0)),
                 textAlign: TextAlign.center,
               ),
@@ -219,12 +219,12 @@ class _Bottom extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: RichText(
               text: TextSpan(
-                text: "Don't have account? ",
+                text: "혹시 아직 계정이 없으신가요? ",
                 style: FontSystem.KR14R.copyWith(color: const Color(0xFF3B4054)),
                 children: <TextSpan>[
                   TextSpan(
-                    text: 'Sign Up',
-                    style: FontSystem.KR14R.copyWith(color: const Color(0xFF567AF3)),
+                    text: '회원가입',
+                    style: FontSystem.KR14B.copyWith(color: const Color(0xFF567AF3)),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Get.to(() => const RegisterScreen()); // 페이지 이동
