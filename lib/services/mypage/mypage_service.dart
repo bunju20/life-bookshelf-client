@@ -2,7 +2,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:life_bookshelf/models/mypage/mypage_model.dart';
+import '../../viewModels/register/register_viewmodel.dart';
 import '../../views/login/login_screen.dart';
+import '../register/register_service.dart';
 import '../userpreferences_service.dart';
 import 'package:get/get.dart';
 
@@ -235,7 +237,7 @@ class MyPageApiService {
       final response = await http.delete(
         Uri.parse('$baseUrl/auth/unregister'),
         headers: {
-          'accept': '*/*',  // accept 헤더 추가
+          'accept': '*/*',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token'
         },
@@ -245,7 +247,17 @@ class MyPageApiService {
 
       if (response.statusCode == 204) {
         print("회원탈퇴 성공");
+
+        // 라우팅 관련 초기화
+        Get.delete<RegisterViewModel>();
+
+        // 토큰 삭제
         await UserPreferences.clearUserToken();
+
+        // 새로운 RegisterViewModel 초기화
+        Get.lazyPut(() => RegisterViewModel(RegisterService()));
+
+        // 로그인 화면으로 이동
         Get.offAll(() => LoginScreen());
       } else {
         var decodedBody = utf8.decode(response.bodyBytes);
@@ -256,10 +268,14 @@ class MyPageApiService {
         } else if (response.statusCode == 409) {
           throw Exception('이미 탈퇴한 회원입니다.');
         } else if (response.statusCode == 500) {
-          // 500 에러 발생 시에도 토큰을 삭제하고 로그인 화면으로 이동
           print("서버 오류가 발생했지만 로그아웃 처리를 진행합니다.");
+
+          // 500 에러시에도 동일한 로그아웃 처리
+          Get.delete<RegisterViewModel>();
           await UserPreferences.clearUserToken();
+          Get.lazyPut(() => RegisterViewModel(RegisterService()));
           Get.offAll(() => LoginScreen());
+
           throw Exception('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
         } else {
           throw Exception('회원탈퇴 처리 중 오류가 발생했습니다. (${response.statusCode})');
@@ -271,4 +287,5 @@ class MyPageApiService {
     }
   }
 }
+
 
