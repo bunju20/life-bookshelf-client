@@ -59,42 +59,6 @@ class _Middle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ElevatedButton.icon(
-          icon: SvgPicture.asset(
-            'assets/icons/login/google_icon.svg',
-            width: 24,
-            height: 24,
-          ),
-          label: Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Text('Google', style: FontSystem.KR18M.copyWith(color: Color(0xFF61677D))),
-          ),
-          onPressed: () {
-            // Google 로그인 로직
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFF5F9FE),
-            minimumSize: Size(double.infinity, 60),
-            shape: RoundedRectangleBorder(  // 버튼의 곡률 조정
-              borderRadius: BorderRadius.circular(14),  // 곡률 값 변경
-            ),
-            alignment: Alignment.centerLeft,
-            elevation: 0,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-          child: Row(
-            children: <Widget>[
-              Expanded(child: Divider()),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 11),
-                child: Text('Or', style: FontSystem.KR14R.copyWith(color: Color(0xFF262626))),
-              ),
-              Expanded(child: Divider()),
-            ],
-          ),
-        ),
         Obx(() => TextField(
           focusNode: viewModel.emailFocusNode,
           style: FontSystem.KR16R.copyWith(color: Color(0xFF262626)),
